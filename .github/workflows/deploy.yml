@@ -1,0 +1,54 @@
+# .gitlab-ci.yml
+
+# Define the stages
+stages:
+  - build
+  - deploy
+
+# Build job
+build:
+  image: node:16
+  stage: build
+  script:
+    - echo "Checking for package manager"
+    - |
+      if [ -f "yarn.lock" ]; then
+        export PACKAGE_MANAGER="yarn"
+        export INSTALL_COMMAND="yarn install"
+        export BUILD_COMMAND="yarn next build"
+        export EXPORT_COMMAND="yarn next export"
+      elif [ -f "package.json" ]; then
+        export PACKAGE_MANAGER="npm"
+        export INSTALL_COMMAND="npm ci"
+        export BUILD_COMMAND="npx --no-install next build"
+        export EXPORT_COMMAND="npx --no-install next export"
+      else
+        echo "Unable to determine package manager"
+        exit 1
+      fi
+    - echo "Installing dependencies with $PACKAGE_MANAGER"
+    - $INSTALL_COMMAND
+    - echo "Building with Next.js"
+    - $BUILD_COMMAND
+    - echo "Exporting static HTML"
+    - $EXPORT_COMMAND
+  artifacts:
+    paths:
+      - out # The output directory for the static files
+    expire_in: 1 week
+
+# Deploy job
+deploy:
+  image: alpine:latest
+  stage: deploy
+  environment:
+    name: production
+    url: https://gitlab.codeiq.xyz/general/documentation/-/wikis
+  dependencies:
+    - build
+  script:
+    - echo "Starting deployment to GitLab Pages"
+    - mv out public
+    - cp -r public /var/opt/gitlab/gitlab-pages/shared/pages
+  only:
+    - main
