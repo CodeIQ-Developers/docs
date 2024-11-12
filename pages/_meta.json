@@ -3,6 +3,7 @@
     "title": "Home"
   },
 
-  "cq-loadingscreen" : "cq-loadingscreen"
-
+  "cq-loadingscreen" : {
+    "title": "cq-loadingscreen"
+  }
 }

@@ -86,8 +86,8 @@ const config: DocsThemeConfig = {
   },
 
   useNextSeoProps: useNextSeoProps,
-feedback : { content: null },
-editLink: { text: null },
+  feedback : { content: null },
+  editLink: { text: null },
 };
 
 export default config;
