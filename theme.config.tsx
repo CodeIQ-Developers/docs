@@ -6,9 +6,9 @@ import { IconFolder, IconFile} from '@tabler/icons-react';
 function useHead() {
   const { asPath } = useRouter();
   const { frontMatter, title } = useConfig();
-  const iconico = "https://codeiq.github.io/docs/static/cq-icon.png";
+  const iconico = "https://docs.codeiq.xyz/static/cq-icon.png";
 
-  const url = `https://codeiq.github.io/docs${asPath}`;
+  const url = `https://docs.codeiq.xyz/${asPath}`;
   const description = frontMatter.description || "Documentation for CodeIQ resources";
 
   return (
@@ -22,7 +22,7 @@ function useHead() {
       <link rel="icon" href={iconico} id="__link-icon"></link>
       <link rel="apple-touch-icon" href={iconico}></link>
       <link rel="preload" as="image" href={iconico}></link>
-      <meta property="og:image" content="https://codeiq.github.io/docs/static/cq-icon.png" />
+      <meta property="og:image" content="https://docs.codeiq.xyz/static/cq-icon.png" />
       <meta property="og:image:alt" content="CodeIQ" />
       <meta property="og:image:type" content="image/png" />
       <meta property="og:image:width" content="256" />
@@ -51,7 +51,7 @@ const config: DocsThemeConfig = {
       style={{
         paddingLeft: '50px',
         lineHeight: '38px',
-        background: "url('https://codeiq.github.io/docs/static/cq-icon.png') no-repeat left",
+        background: "url('https://docs.codeiq.xyz/static/cq-icon.png') no-repeat left",
         backgroundSize: '38px',
         fontWeight: 550,
       }}

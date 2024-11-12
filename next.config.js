@@ -7,7 +7,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const assetPrefix = isProduction ? "/introduction" : "";
 module.exports = {
 	...withNextra(),
-	basePath: "/docs",
+	basePath: "",
 	images: {
 		unoptimized: true,
 	},
