@@ -71,7 +71,7 @@ const config: DocsThemeConfig = {
     defaultMenuCollapseLevel: 1,
     titleComponent({ title, type, route }) {
       const folderRoutes = new Set([
-
+          '/cq-loadingscreen'
       ]);
 
       const isFolder = folderRoutes.has(route);

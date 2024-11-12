@@ -1,0 +1,101 @@
+
+import { Steps } from 'nextra-theme-docs';
+import { Callout } from 'nextra/components';
+import { Tabs, Tab } from 'nextra-theme-docs';
+
+## Configuration
+
+<Steps>
+    ### Set background
+    <Callout type="warning">
+
+        It is **important** to note that you can only have one of the two options enabled at the same time. If you want to change from one to the other, you must comment out the current option and uncomment the new one.
+
+    </Callout>
+
+    **Select the background type you want to use:**
+
+    <Tabs items={['image', 'video']}>
+        <Tab>
+            For changing the image, go to `cq-loadingscreen/ui/assets/css/styles.css` and change the line 31: `background-image: url('../images/bg.png');`
+            ```css {5} filename="styles.css"
+                .bg-image {
+                    position: absolute;
+                    width: 100vw;
+                    height: 100vh;
+                    background-image: url('../images/bg.png');
+                    background-position: left center;
+                    background-size: cover;
+                    transform: scale(1.05);
+                    background-repeat: no-repeat;
+                    z-index: -1;
+                }
+            ```
+            Check the lines 15-16 in the `cq-loadingscreen/ui/index.html` file for avoid conflicts with the video option, it should look like this:
+            ```html filename="index.html"
+                <div class="bg-image"></div>
+                <!-- <video autoplay loop muted class="bg-video" src="assets/video/..."></video> -->
+            ```
+
+        </Tab>
+        <Tab>
+            You must go to the lines 15-16 in the `cq-loadingscreen/ui/index.html` file and set the source path on the `src` attribute of the video tag.
+            Also, you must comment out the image option to avoid conflicts. It should look like this:
+            ```html filename="index.html"
+                <!-- <div class="bg-image"></div> -->
+                <video autoplay loop muted class="bg-video" src="assets/video/bg.mp4"></video>
+            ```
+        </Tab>
+    </Tabs>
+
+    ### Set server logo
+
+    You must go to the line 21 in the `cq-loadingscreen/ui/index.html` file and set the route of your server logo in the `src` attribute.
+
+    ```html filename="index.html"
+        <img src="assets/images/logo.png" alt="logo" class="logo">
+    ```
+
+    ### Change Colors
+
+    Go to the `cq-loadingscreen/ui/assets/css/styles.css` file and change the colors on the `:root` selector at the beginning of the file.
+
+    ```css showLineNumbers filename="styles.css"
+        :root {
+            --primary-color: #8E53FD;
+            --secondary-color: #180848;
+            --base-color: #FFF;
+            --base-color-2: #e1e1e1;
+            --global-background-color: #000;
+        }
+    ```
+
+    ### Config Audio Files
+
+    <Callout type="info">
+
+        Be sure to follow the steps below to add audio files to the loading screen.
+
+    </Callout>
+
+    <Steps>
+
+        ### Add Audio Files to the Folder
+
+        Copy your audio files to the `cq-loadingscreen/ui/assets/audio` folder.
+
+        ### Add Audio Files to the JSON
+
+        Go to `cq-loadingscreen/audios.json` file. This file is a JSON array with the audio files that will be loaded. You can add as many audio files as you want.
+
+        ```json showLineNumbers filename="audios.json"
+        [
+        "audio1.mp3",
+        "audio2.mp3",
+        "audio3.mp3"
+        ]
+        ```
+
+    </Steps>
+
+</Steps>
