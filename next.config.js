@@ -4,10 +4,10 @@ const withNextra = require('nextra')({
 })
 
 const isProduction = process.env.NODE_ENV === "production";
-const assetPrefix = isProduction ? "/introduction" : "";
+const assetPrefix = isProduction ? "/home" : "";
 module.exports = {
 	...withNextra(),
-	basePath: "",
+	// basePath: ".",
 	images: {
 		unoptimized: true,
 	},
