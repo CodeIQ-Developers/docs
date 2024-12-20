@@ -3,9 +3,9 @@
     "title": "Home"
   },
   "loadingscreen" : {
-    "title": "cq-loadingscreen"
+    "title": "loadingscreen"
   },
   "pausemenu" : {
-    "title": "cq-pausemenu"
+    "title": "pausemenu"
   }
 }
