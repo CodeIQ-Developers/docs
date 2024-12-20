@@ -5,5 +5,9 @@
 
   "cq-loadingscreen" : {
     "title": "cq-loadingscreen"
+  },
+
+  "cq-pausemenu" : {
+    "title": "cq-pausemenu"
   }
 }
