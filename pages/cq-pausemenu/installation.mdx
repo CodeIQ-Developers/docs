@@ -2,7 +2,7 @@
 title: Installation
 ---
 
-import { Steps,Tabs, Tab } from 'nextra-theme-docs';
+import { Steps, Tabs, Tab } from 'nextra-theme-docs';
 import { Callout } from 'nextra/components';
 
 ## Installation
@@ -23,12 +23,10 @@ import { Callout } from 'nextra/components';
     }
     ```
 
-    | Option         | Description                                             |
-    |:---------------|:--------------------------------------------------------|
-    | `logo.url`     | **Required**. URL of the server logo.                   |
-    | `logo.size`    | Size of the logo.                                       |
-    | `logo.padding` | Padding for the logo (x and y for horizontal/vertical). |
-    | `background`   | **Required**. URL of the background image.              |
+    - `logo.url`: **Required**. URL of the server logo.
+    - `logo.size`: Size of the logo.
+    - `logo.padding`: Padding for the logo (x and y for horizontal/vertical).
+    - `background`: **Required**. URL of the background image.
 
     <Callout type="info">
             **Tip:** Use [FiveManage](https://fivemanage.com/) to host and manage your images.
@@ -47,12 +45,10 @@ import { Callout } from 'nextra/components';
     }
     ```
 
-    | Option        | Description                          |
-    |:--------------|:-------------------------------------|
-    | `volume`      | Audio volume level.                  |
-    | `hover`       | URL of the hover sound effect.       |
-    | `click`       | URL of the click sound effect.       |
-    | `transition`  | URL of the transition sound effect.  |
+    - `volume`: Audio volume level.
+    - `hover`: URL of the hover sound effect.
+    - `click`: URL of the click sound effect.
+    - `transition`: URL of the transition sound effect.
 
     ### Toggle Menu Options
 
@@ -68,13 +64,11 @@ import { Callout } from 'nextra/components';
     }
     ```
 
-    | Option       | Description                                         |
-    |:-------------|:----------------------------------------------------|
-    | `bills`      | Toggle the "Bills" menu.                            |
-    | `properties` | Toggle the "Properties" menu.                       |
-    | `commerces`  | Toggle the "Commerces" menu.                        |
-    | `help`       | Toggle the "Help" menu.                             |
-    | `exit`       | Set the exit action ('disconnect' or 'logout').     |
+    - `bills`: Toggle the "Bills" menu.
+    - `properties`: Toggle the "Properties" menu.
+    - `commerces`: Toggle the "Commerces" menu.
+    - `help`: Toggle the "Help" menu.
+    - `exit`: Set the exit action ('disconnect' or 'logout').
 
     <Callout type="info">
         **Note:** The `logout` option is for if you have a multi-character system and want to return to the character selection screen. The `disconnect` option will just drop the player from the server.
@@ -105,10 +99,8 @@ import { Callout } from 'nextra/components';
     }
     ```
 
-    | Option       | Description                                           |
-    |:-------------|:------------------------------------------------------|
-    | `name`       | Shortcut's event name (matches the exported event).   |
-    | `icon`       | URL of the shortcut's icon.                           |
+    - `name`: Shortcut's event name (matches the exported event).
+    - `icon`: URL of the shortcut's icon.
 
     ### Add New Shortcut Example (Optional)
 
@@ -191,13 +183,11 @@ import { Callout } from 'nextra/components';
     end)
     ```
 
-    | Event Name     | Description                                      |
-    |:---------------|:-------------------------------------------------|
-    | `service`      | Action triggered by the "Service" shortcut.      |
-    | `organization` | Action for the "Organization" shortcut.          |
-    | `business`     | Action for the "Business" shortcut.              |
-    | `crew`         | Action for the "Crew" shortcut.                  |
-    | `example`      | Example shortcut for custom use cases.           |
+    - `service`: Action triggered by the "Service" shortcut.
+    - `organization`: Action for the "Organization" shortcut.
+    - `business`: Action for the "Business" shortcut.
+    - `crew`: Action for the "Crew" shortcut.
+    - `example`: Example shortcut for custom use cases.
 
 
 </Steps>
