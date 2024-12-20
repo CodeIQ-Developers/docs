@@ -1,3 +1,5 @@
 {
-  "installation": "Installation"
+  "installation": {
+    "title": "Installation"
+  },
 }

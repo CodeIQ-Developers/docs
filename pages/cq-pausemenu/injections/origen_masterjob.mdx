@@ -1,0 +1,17 @@
+---
+title: Origen Masterjob
+---
+
+import { Callout } from 'nextra/components';
+
+## Origen Masterjob Injection
+
+<Callout type="info">
+    Please note that it is essential to list the jobs from `origen_masterjob` on the commerces tab.
+</Callout>
+
+You must insert the next line at the bottom of the fxmanifest.lua on origen_masterjob resource.
+
+```lua filename="fxmanifest.lua"
+server_script  "@cq-lib/injections/server/origen_masterjob.lua"
+```

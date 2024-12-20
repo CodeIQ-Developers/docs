@@ -1,3 +1,8 @@
 {
-  "installation": "Installation"
+  "installation": {
+    "title": "Installation"
+  },
+  "injections": {
+    "title": "Injections"
+  }
 }

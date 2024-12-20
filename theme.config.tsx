@@ -72,7 +72,8 @@ const config: DocsThemeConfig = {
     titleComponent({ title, type, route }) {
       const folderRoutes = new Set([
           '/cq-loadingscreen',
-          '/cq-pausemenu'
+          '/cq-pausemenu',
+          '/cq-pausemenu/injections',
       ]);
 
       const isFolder = folderRoutes.has(route);
