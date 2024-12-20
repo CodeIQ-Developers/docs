@@ -2,10 +2,10 @@
   "index": {
     "title": "Home"
   },
-  "cq-loadingscreen" : {
+  "loadingscreen" : {
     "title": "cq-loadingscreen"
   },
-  "cq-pausemenu" : {
+  "pausemenu" : {
     "title": "cq-pausemenu"
   }
 }
