@@ -1,3 +1,5 @@
 {
-  "origen_masterjob": "Origen Masterjob"
+  "origen_masterjob": {
+    "title": "Origen Masterjob"
+  }
 }
