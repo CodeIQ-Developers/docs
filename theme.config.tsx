@@ -75,7 +75,7 @@ const config: DocsThemeConfig = {
           '/cq-bills',
           '/cq-loadingscreen',
           '/cq-pausemenu',
-          '/cq-pausemenu/cq-injections',
+          '/cq-pausemenu/injections',
       ]);
 
       const isFolder = folderRoutes.has(route);
