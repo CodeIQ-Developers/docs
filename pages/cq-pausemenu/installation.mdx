@@ -7,200 +7,189 @@ import { Callout } from 'nextra/components';
 
 ## Installation
 
+<Callout type="info">
+
+Use [FiveManage](https://fivemanage.com/) to host and manage your images efficiently.
+
+</Callout>
+
 <Steps>
-    ### Set Language
 
-    Set the next convar in your server.cfg file to the language you want to use in the pause menu:
+    ### Set ensure order
 
-    ```lua filename="server.cfg"
-    setr cq-translate "en"
+    You must have the next order on your server.cfg for the scripts to start:
+
+    ```cfg filename="server.cfg"
+    ensure cq-lib
+    ensure cq-bills
+    ensure cq-pausemenu
     ```
 
-    - `en`: English
-    - `es`: Spanish
+    ### Set Background
 
-    ### Set Images
-
-    Images for the logo and background are configurable via the `Config` table:
+    To set the menu background, modify the `Config.background` property in your `config.lua`:
 
     ```lua filename="config.lua"
-    Config.images = {
-        logo = {
-            url = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/isologo-CodeIQ.png', -- Set your logo URL here
-            size = 10, -- Logo size
-            padding = { x = 0, y = 0 }, -- Padding around the logo
-        },
-        background = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/background.png' -- Background image URL
-    }
+    Config.background = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/cq-pausemenu-bg.png'
     ```
-
-    - `logo.url`: **Required**. URL of the server logo.
-    - `logo.size`: Size of the logo.
-    - `logo.padding`: Padding for the logo (x and y for horizontal/vertical).
-    - `background`: **Required**. URL of the background image.
-
-    <Callout type="info">
-            **Tip:** Use [FiveManage](https://fivemanage.com/) to host and manage your images.
-    </Callout>
 
     ### Set Sounds
 
-    Configure menu sound effects such as hover, click, and transitions:
+    Configure sound effects (hover, click, and transitions) via the `Config.sounds` table:
 
     ```lua filename="config.lua"
     Config.sounds = {
-        volume = 0.1, -- Default audio volume (0.0 to 1.0)
-        hover = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/pause-hover.ogg', -- Hover sound
-        click = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/click.mp3', -- Click sound
-        transition = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/transition.mp3' -- Transition sound
+        volume = 0.1, -- Audio volume (0.0 to 1.0)
+        hover = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/pause-hover.ogg',
+        click = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/click.mp3',
+        transition = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/transition.mp3'
     }
     ```
 
-    - `volume`: Audio volume level.
-    - `hover`: URL of the hover sound effect.
-    - `click`: URL of the click sound effect.
-    - `transition`: URL of the transition sound effect.
+    | **Option**     | **Description**                           |
+    |----------------|-------------------------------------------|
+    | `volume`       | Volume level for all sound effects.       |
+    | `hover`        | URL of hover sound effect.                |
+    | `click`        | URL of click sound effect.                |
+    | `transition`   | URL of transition sound effect.           |
 
-    ### Toggle Menu Options
+</Steps>
 
-    Enable or disable core menu options via the `Config.menu_options` table:
+---
+
+<Steps>
+    ### Configure Menu Options
+
+    Modify core menu options in the `Config.menu_options` table:
 
     ```lua filename="config.lua"
     Config.menu_options = {
-        bills = true,        -- Enable the Bills menu
-        properties = true,   -- Enable the Properties menu
-        commerces = true,    -- Enable the Commerces menu
-        help = true,         -- Enable the Help menu
-        exit = 'disconnect'  -- Or 'logout'
+        map = {
+            image = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/cq-pausemenu-map.png',
+            icon = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/map.svg'
+        },
+        properties = {
+            enable = true,
+            image = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/cq-pausemenu-properties.png',
+            icon = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/home.svg'
+        },
+        commerces = {
+            enable = true,
+            image = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/cq-pausemenu-properties.png',
+            icon = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/shops.svg'
+        },
+        settings = {
+            image = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/cq-pausemenu-settings.png',
+            icon = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/settings.svg'
+        },
+        help = {
+            enable = true,
+            image = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/cq-pausemenu-help.png',
+            icon = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/help.svg'
+        },
+        exit = {
+            event = 'disconnect', -- 'disconnect' or 'logout'
+            image = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/cq-pausemenu-exit.png',
+            icon = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/door-exit.svg'
+        },
+        bills = true
     }
     ```
 
-    - `bills`: Toggle the "Bills" menu.
-    - `properties`: Toggle the "Properties" menu.
-    - `commerces`: Toggle the "Commerces" menu.
-    - `help`: Toggle the "Help" menu.
-    - `exit`: Set the exit action ('disconnect' or 'logout').
+    | **Option**              | **Description**                                    |
+    |-------------------------|----------------------------------------------------|
+    | `map.image`             | Set image background for the "Map" card.           |
+    | `map.icon`              | Set icon for the "Map" label.                      |
+    | `properties.enable`     | Toggle visibility for "Properties" menu.           |
+    | `properties.image`      | Set image background for the "Properties" card.    |
+    | `properties.icon`       | Set icon for the "Properties" label.               |
+    | `commerces.enable`      | Toggle visibility for "Commerces" menu.            |
+    | `commerces.image`       | Set image background for the "Commerces" card.     |
+    | `commerces.icon`        | Set icon for the "Commerces" label.                |
+    | `settings.image`        | Set image background for the "Settings" card.      |
+    | `settings.icon`         | Set icon for the "Settings" label.                 |
+    | `help.enable`           | Toggle visibility for "Help" menu.                 |
+    | `help.image`            | Set image background for the "Help" card.          |
+    | `help.icon`             | Set icon for the "Help" label.                     |
+    | `exit.event`            | Event for the "Exit" menu.                         |
+    | `exit.image`            | Set image background for the "Exit" card.          |
+    | `exit.icon`             | Set icon for the "Exit" label.                     |
+    | `bills.enable`          | Toggle visibility for the "Bills" menu.            |
 
-    <Callout type="info">
-        **Note:** The `logout` option is for if you have a multi-character system and want to return to the character selection screen. The `disconnect` option will just drop the player from the server.
+    <Callout type="note">
+
+    - To disable an icon, set it to `false` (e.g., `map.icon = false`).
+    - Use the `help` option to link the menu to a server-side report system.
+    - Set `exit.event` to `logout` if using a multi-character system; otherwise, use `disconnect` for simple exit functionality.
+
     </Callout>
+</Steps>
 
+---
+
+<Steps>
+    ### Configure Custom Events
+
+    Add behavior for `help` or `exit` events in `cq-lib/bridge/client/actions/main.lua`:
+
+    ```lua filename="main.lua"
+    exports('HelpMenu', function()
+        ExecuteCommand('report') -- Replace with custom Help menu event logic
+    end)
+
+    exports('LogoutEvent', function()
+        if GetResourceState('origen_titlemenu'):match('start') then
+            TriggerEvent('origen_titlemenu:client:Logout')
+            TriggerServerEvent('cq.lib:server:PlayerLogout')
+        end
+    end)
+    ```
+
+    | **Event**        | **Description**                                   |
+    |------------------|---------------------------------------------------|
+    | `HelpMenu`       | Triggers when the "Help" option is clicked.        |
+    | `LogoutEvent`    | Triggers when `exit.event = 'logout'` is selected. |
+</Steps>
+
+---
+
+<Steps>
     ### Customize Shortcuts
 
-    Configure up to 4 shortcuts and icons and their associated events:
+    Configure shortcuts related to menu navigation and events:
 
     ```lua filename="config.lua"
     Config.shortcuts = {
         [1] = {
-            name = 'service', -- Shortcut event name
-            icon = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/policia.svg' -- Icon URL
+            name = 'service',
+            image = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/cq-pausemenu-services.png'
         },
         [2] = {
             name = 'organization',
-            icon = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/bandido.svg'
+            image = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/cq-pausemenu-organizations.png'
         },
         [3] = {
             name = 'business',
-            icon = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/maletin.svg'
+            image = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/cq-pausemenu-business.png'
         },
         [4] = {
             name = 'crew',
-            icon = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/crews.svg'
+            image = 'https://r2.fivemanage.com/u5HR6uOgjbQM4owiGySU1/images/cq-pausemenu-crews.png'
         }
     }
     ```
 
-    - `name`: Shortcut's event name (matches the exported event).
-    - `icon`: URL of the shortcut's icon.
-
-    ### Add New Shortcut Example (Optional)
-
-    <Steps>
-        ### Config Custom Shortcut
-
-        Add a new shortcut entry in the `Config.shortcuts` table:
-
-        ```lua filename="config.lua"
-        [5] = {
-            name = 'example',
-            icon = 'https://example.com/icon-url.png'
-        }
-        ```
-
-        ### Create Custom Shortcut Event
-
-        Define the behavior for this shortcut in `cq-lib/bridge/client/actions/main.lua`:
-
-        ```lua filename="main.lua"
-        exports('example', function()
-            --- Put your event logic here
-            print('Example Shortcut')
-        end)
-        ```
-    </Steps>
-
-    ### Configure Shortcut Events
-
-    Add custom behavior for each shortcut in `cq-lib/bridge/client/actions/main.lua`:
-
-    ```lua filename="main.lua"
-    local callback = exports['cq-lib']:Callbacks()
-
-    -- Menu Events
-    exports('BillsMenu', function()
-        print('billsMenu') -- Replace with your Bills menu event logic
-    end)
-
-    exports('HelpMenu', function()
-        print('helpMenu') -- Replace with your Help menu event logic
-    end)
-
-    export('LogoutEvent', function()
-    ExecuteCommand('logout') -- Replace with your logout event logic
-    end)
-
-    -- Shortcut Actions
-    exports('service', function()
-        if GetResourceState('origen_police'):match('start') then
-            ExecuteCommand('pcad') -- Trigger police service menu
-        end
-    end)
-
-    exports('organization', function()
-        if GetResourceState('origen_ilegal'):match('start') then
-            local result = callback:await('cq-pausemenu:getGang')
-            if result then
-                TriggerEvent("origen_ilegal:OpenGangMenu")
-            else
-                QBCore.Functions.Notify("No puedes utilizar este menú", "error")
-            end
-        end
-    end)
-
-    exports('business', function()
-        if GetResourceState('origen_masterjob'):match('start') then
-            ExecuteCommand('-businnestablet') -- Trigger business tablet menu
-        end
-    end)
-
-    exports('crew', function()
-        print('crewMenu') -- Replace with your crew menu logic
-    end)
-
-    -- Example Shortcut
-    exports('example', function()
-        --- Put your event logic here
-        print('Example Shortcut')
-    end)
-    ```
-
-    - `service`: Action triggered by the "Service" shortcut.
-    - `organization`: Action for the "Organization" shortcut.
-    - `business`: Action for the "Business" shortcut.
-    - `crew`: Action for the "Crew" shortcut.
-    - `example`: Example shortcut for custom use cases.
-
+    | **Option**       | **Description**                                   |
+    |------------------|---------------------------------------------------|
+    | `name`           | Shortcut's event name (matches exported event).   |
+    | `image`          | URL for the shortcut's image.                     |
 
 </Steps>
+
+<Callout type="info">
+
+For advanced customizations, you can define additional behaviors or shortcuts in `cq-lib/bridge/client/actions/main.lua`.
+
+</Callout>
 
 Feel free to customize further based on your server's needs! 🚀

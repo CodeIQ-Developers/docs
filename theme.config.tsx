@@ -71,9 +71,11 @@ const config: DocsThemeConfig = {
     defaultMenuCollapseLevel: 1,
     titleComponent({ title, type, route }) {
       const folderRoutes = new Set([
-          '/loadingscreen',
-          '/pausemenu',
-          '/pausemenu/injections',
+          '/cq-lib',
+          '/cq-bills',
+          '/cq-loadingscreen',
+          '/cq-pausemenu',
+          '/cq-pausemenu/cq-injections',
       ]);
 
       const isFolder = folderRoutes.has(route);

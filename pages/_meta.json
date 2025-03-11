@@ -2,6 +2,12 @@
   "index": {
     "title": "Home"
   },
+  "cq-lib" : {
+    "title": "cq-lib"
+  },
+  "cq-bills" : {
+    "title": "cq-bills"
+  },
   "cq-loadingscreen" : {
     "title": "cq-loadingscreen"
   },

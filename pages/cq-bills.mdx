@@ -1,0 +1,25 @@
+{/* --- */}
+{/* title: CodeIQ Bills */}
+{/* --- */}
+
+import { Callout } from 'nextra/components';
+
+# CodeIQ Bills
+
+We are excited to introduce **CodeIQ Bills**, the centralized billing engine! This script allows you to manage and process invoices from multiple sources in one unified interface, providing flexibility and scalability for your server’s billing management.
+
+## Features
+
+The **CodeIQ Bills** system offers:
+
+- **Centralized Management**: Process and query invoices from multiple external resources in one engine.
+- **Customizable Handlers**: Register handlers to process bills for specific sources.
+- **SQL Integration**: Flexible querying and updating of your invoice tables.
+- **Ease of Use**: Simple configuration for adding, modifying, and managing new invoice sources.
+- **Extensibility**: Compatible with custom resources and systems like `origen_masterjob` or `origen_police`.
+
+<Callout type="info">
+    Properly configured databases and billing tables are required for each external source.
+
+    All invoice processing and querying are handled through one centralized engine, simplifying the management of multiple data sources.
+</Callout>

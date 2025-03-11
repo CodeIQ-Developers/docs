@@ -1,0 +1,32 @@
+---
+title: Installation
+---
+
+
+import { Steps } from 'nextra-theme-docs';
+import { Callout } from 'nextra/components';
+
+## Configuration Settings
+
+<Steps>
+    ### Set Language
+
+    Set the language for all the CodeIQ scripts (`en` or `es`). Add the following line to your `server.cfg` file:
+
+    ```lua filename="server.cfg"
+    setr cq-translate "en"
+    ```
+
+    <Callout type="info">
+        If you don't set this line, the default language will be English (`en`).
+    </Callout>
+
+    ### Link Discord
+
+    Link your server with Discord to access user data, including their name and profile image. Add the following line to your `server.cfg` file:
+
+    ```lua filename="server.cfg"
+    setr cq-dsToken "YOUR_TOKEN_BOT"
+    ```
+
+</Steps>

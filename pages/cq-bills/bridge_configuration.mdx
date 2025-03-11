@@ -1,0 +1,164 @@
+---
+title: Bridge Configuration
+---
+
+import { Steps, Tabs, Tab } from 'nextra-theme-docs';
+import { Callout } from 'nextra/components';
+
+# CodeIQ Bills Configuration
+
+The **CodeIQ Bills** system is the centralized billing engine that allows you to manage invoices from multiple external resources. Follow this guide to configure and extend the system for your server.
+
+<Steps>
+
+    ### Configuration
+
+    The `config.lua` file lets you configure external resources compatible with the billing engine. Each external source should be defined in the `Config.ExternalResources` table.
+
+    #### Adding External Billing Sources
+
+    To integrate an external resource, edit the `config.lua` file and include the necessary details as shown below:
+    ```lua
+        Config.ExternalResources = {
+            {
+                resource = 'origen_masterjob', -- Name of the resource
+                tableName = 'origen_masterjob_bills', -- Table storing the resource's bills
+                ownerIdField = 'citizenid' -- Field identifying the owner of the bill
+            },
+            {
+                resource = 'origen_police',
+                tableName = 'origen_police_bills',
+                ownerIdField = 'citizenid'
+            }
+        }
+    ```
+
+    | **Key**          | **Description**                                             |
+    |------------------|-------------------------------------------------------------|
+    | `resource`       | Name of the external resource.                              |
+    | `tableName`      | SQL table containing the invoices.                          |
+    | `ownerIdField`   | Field identifying the owner of each invoice (e.g., `citizenid`). |
+
+    <Callout type="info">
+        Example: This configuration integrates `origen_masterjob` and `origen_police` with their respective tables for invoices.
+    </Callout>
+
+    ---
+
+    ### Using Core Functions
+
+    #### Registering Custom Handlers
+
+    Use the `Bridge.registerHandler()` function to create a custom handler for processing invoices from a specific resource.
+    ```lua
+        Bridge.registerHandler(resourceName, handler)
+    ```
+
+    | **Parameter**    | **Description**                                              |
+    |------------------|--------------------------------------------------------------|
+    | `resourceName`   | Name of the external resource (e.g., `origen_police`).       |
+    | `handler`        | Function executed to process invoices for this resource.     |
+
+    ##### Example:
+    ```lua
+        Bridge.registerHandler('origen_police', function(billInfo, billId)
+            lib.db.query('UPDATE origen_police_bills SET payed = 1 WHERE id = @bill_id', {['@bill_id'] = billId})
+            if GetResourceState('qb-banking'):match('start') then
+                exports['qb-banking']:AddMoney(billInfo.job, billInfo.price, 'Bill Payment')
+            end
+        end)
+    ```
+
+    This handler updates the status of invoices in `origen_police_bills` and adds money via `qb-banking` if enabled.
+
+    ---
+
+    #### Processing Invoices
+
+    The `Bridge.handleExternalBill()` function allows you to process invoices associated with a registered resource.
+    ```lua
+        local success, message = Bridge.handleExternalBill(billInfo, billId)
+    ```
+
+    | **Parameter**    | **Description**                                              |
+    |------------------|--------------------------------------------------------------|
+    | `billInfo`       | Information about the bill (e.g., `data_source`, `price`).   |
+    | `billId`         | Unique identifier for the bill.                              |
+
+    | **Return Value**                | **Description**                               |
+    |---------------------------------|-----------------------------------------------|
+    | `true, "Bill paid successfully"`| The bill was processed successfully.          |
+    | `false, "No handler found..."`  | No handler was registered for this resource.  |
+
+    ---
+
+    #### Querying Unpaid Invoices
+
+    Use the `Bridge.fetchExternalBills()` function to retrieve unpaid invoices from external resources.
+    ```lua
+        Bridge.fetchExternalBills(resourceName, tableName, billFields, filterUnpaid)
+    ```
+
+    | **Parameter**    | **Description**                                              |
+    |------------------|--------------------------------------------------------------|
+    | `resourceName`   | Name of the external resource.                               |
+    | `tableName`      | SQL table containing the invoices.                           |
+    | `billFields`     | Table mapping key fields (`id`, `price`) to invoice fields.  |
+    | `filterUnpaid`   | Boolean. If `true`, fetches only unpaid invoices.            |
+
+    ##### Example:
+    ```lua
+        Bridge.fetchExternalBills( 'origen_police', 'origen_police_bills', { id = 'id', player_id = 'citizenid', title = 'title', description = 'description', price = 'price', job = 'job' }, true -- Fetch only unpaid invoices )
+    ```
+
+</Steps>
+
+---
+
+## Example Integration: `origen_masterjob`
+
+<Tabs items={['Step 1: Configure', 'Step 2: Register', 'Step 3: Query']}>
+    <Tab>
+        Add `origen_masterjob` to the `Config.ExternalResources` table in `config.lua`:
+
+        ```lua
+            {
+                resource = 'origen_masterjob',
+                tableName = 'origen_masterjob_bills',
+                ownerIdField = 'citizenid'
+            }
+        ```
+    </Tab>
+    <Tab>
+        Create a handler to process invoices for this resource:
+
+        ```lua
+            Bridge.registerHandler('origen_masterjob', function(billInfo, billId)
+                lib.db.query('UPDATE origen_masterjob_bills SET payed = 1 WHERE id = @bill_id', {['@bill_id'] = billId})
+                exports['origen_masterjob']:AddBusinessMoney(billInfo.job, billInfo.price)
+            end)
+        ```
+    </Tab>
+    <Tab>
+        Fetch the unpaid invoices from the `origen_masterjob_bills` table:
+
+        ```lua
+            Bridge.fetchExternalBills('origen_masterjob', 'origen_masterjob_bills', { id = 'id', player_id = 'citizenid', title = 'title', description = 'description', price = 'price', job = 'job' }, true)
+        ```
+    </Tab>
+</Tabs>
+
+<Callout type="info">
+    The **CodeIQ Bills** engine can be extended easily by following these steps for any external resource.
+</Callout>
+
+---
+
+## Key Notes
+
+- Ensure your tables include required fields (`id`, `citizenid`, `price`).
+- Register a handler for each resource using `Bridge.registerHandler()`.
+- Always specify `filterUnpaid` when querying unpaid invoices.
+
+With the **CodeIQ Bills** system, managing invoices across various resources has never been easier! 🚀
+```
