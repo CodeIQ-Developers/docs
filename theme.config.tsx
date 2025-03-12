@@ -72,6 +72,7 @@ const config: DocsThemeConfig = {
     titleComponent({ title, type, route }) {
       const folderRoutes = new Set([
           '/cq-lib',
+          '/cq-lib/discord-bot',
           '/cq-bills',
           '/cq-loadingscreen',
           '/cq-pausemenu',
